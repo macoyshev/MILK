@@ -59,6 +59,7 @@ def compare_date(f_d, s_d):
         return False
 
 
+timetable = {}
 today = str(datetime.datetime.now().date())
 times = ['08:30:00', '10:25:00', '12:40:00', '14:35:00', '16:30:00', '18:25:00']
 urls = {
@@ -82,8 +83,11 @@ for date in V_timetable.keys():
                 S = 0
             chance = V*(T + S)
             suitable_time[time] = chance
-        print(date, ':')
-        for key in suitable_time.keys():
-            print('\t', key, '==', suitable_time[key])
-print('\n', 'Current date : {} '.format(today))
-close = input()
+        timetable[str(date)] = suitable_time.copy()
+days = list(timetable.keys())
+days.sort()
+for day in days:
+    print(day)
+    for time, choice in timetable[day].items():
+        print('\t',time,'==',choice)
+
